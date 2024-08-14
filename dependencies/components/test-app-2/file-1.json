@@ -1,0 +1,16 @@
+{
+    "id": "testapp2",
+    "label": "Test application 2",
+    "applicationId": "testapp2",
+    "dependencies": [
+      {
+        "id": "1",
+        "applicationId": "1"
+        "thisis":"wrong"
+      },
+      {
+        "id": "2", 
+        "applicationId": "2"
+      }
+    ]
+  }

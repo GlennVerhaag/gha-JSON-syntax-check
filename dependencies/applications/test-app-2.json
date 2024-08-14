@@ -1,0 +1,22 @@
+{
+    "id": "testapp1",
+    "label": "Test Application 1",
+    "dependencies": [
+      {
+        "id": "1"
+      },
+      {
+        "id": "2"
+      },
+      {
+        "id": "3"
+      },
+      {
+        "id": "4"
+        "thisis":"incorrect"
+      },
+      {
+        "id": "5"
+      }
+    ]
+  }

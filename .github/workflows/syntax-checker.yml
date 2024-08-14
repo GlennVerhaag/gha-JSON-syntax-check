@@ -1,0 +1,40 @@
+name: 'JSON Syntax checker'
+
+on:
+  workflow_dispatch:
+    inputs:
+      application:
+        description: "Name of the application."
+        required: true
+        type: string
+      pathToFiles:
+        description: "Path to folder where the documentation files are located."
+        required: true
+        type: string
+        default: "dependencies"
+
+jobs:
+  check-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Check application JSON syntax
+        id: check-app
+        run: |
+          jq . $PWD/${{ inputs.pathToFiles }}/applications/${{ inputs.application }}.json 1> /dev/null
+
+      - name: Check components JSON syntax
+        id: check-components
+        run: |
+          for file in $PWD/${{ inputs.pathToFiles }}/dependencies/components/${{ inputs.application }}/*.json; do
+          jq . "$file" 1> /dev/null; done
+
+      - name: Final step
+        run: echo "Done. No errors."      
+
+
+      
