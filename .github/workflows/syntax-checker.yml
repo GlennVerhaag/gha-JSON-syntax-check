@@ -25,15 +25,15 @@ jobs:
       - name: Check application JSON syntax
         id: check-app
         run: |
-            jq . "$PWD/dependencies/applications/${{ inputs.application }}.json" 1> /dev/null
+            jq . "$PWD/${{ inputs.pathToFiles }}/applications/${{ inputs.application }}.json" 1> /dev/null
         
       - name: Check components JSON syntax
         id: check-components
         run: |
-            for file in $PWD/dependencies/components/${{ inputs.application }}/*.json; do
+            for file in $PWD/${{ inputs.pathToFiles }}/components/${{ inputs.application }}/*.json; do
             jq . "$file" 1> /dev/null
             done
-            
+
       - name: Final step
         run: echo "Done. No errors."      
 
