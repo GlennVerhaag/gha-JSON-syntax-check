@@ -30,8 +30,10 @@ jobs:
       - name: Check components JSON syntax
         id: check-components
         run: |
-          for file in $PWD/${{ inputs.pathToFiles }}/dependencies/components/${{ inputs.application }}/*.json; do
-          jq . "$file" 1> /dev/null; done
+          for file in $PWD/${{ inputs.pathToFiles }}/dependencies/components/${{ inputs.application }}/*.json; 
+          do
+          jq . "$file" 1> /dev/null; 
+          done
 
       - name: Final step
         run: echo "Done. No errors."      
