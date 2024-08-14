@@ -30,10 +30,13 @@ jobs:
       - name: Check components JSON syntax
         id: check-components
         run: |
-          for file in $PWD/${{ inputs.pathToFiles }}/dependencies/components/${{ inputs.application }}/*.json; 
-          do
-          jq . "$file" 1> /dev/null; 
+          if ls $PWD/dependencies/components/${{ inputs.application }}/*.json 1> /dev/null 2>&1; then
+            for file in $PWD/dependencies/components/${{ inputs.application }}/*.json; do
+            jq . "$file" 1> /dev/null
           done
+          else
+            echo "No JSON files found in $PWD/dependencies/components/${{ inputs.application }}/"
+          fi
 
       - name: Final step
         run: echo "Done. No errors."      
