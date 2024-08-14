@@ -25,23 +25,15 @@ jobs:
       - name: Check application JSON syntax
         id: check-app
         run: |
-          if [ -f "$PWD/dependencies/applications/${{ inputs.application }}.json" ]; then
             jq . "$PWD/dependencies/applications/${{ inputs.application }}.json" 1> /dev/null
-          else
-            echo "File $PWD/dependencies/applications/${{ inputs.application }}.json not found"
-          fi
-
+        
       - name: Check components JSON syntax
         id: check-components
         run: |
-          if ls $PWD/dependencies/components/${{ inputs.application }}/*.json 1> /dev/null 2>&1; then
             for file in $PWD/dependencies/components/${{ inputs.application }}/*.json; do
             jq . "$file" 1> /dev/null
-          done
-          else
-            echo "No JSON files found in $PWD/dependencies/components/${{ inputs.application }}/"
-          fi
-
+            done
+            
       - name: Final step
         run: echo "Done. No errors."      
 
